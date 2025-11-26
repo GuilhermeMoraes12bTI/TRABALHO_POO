@@ -55,6 +55,7 @@ public class Main {
 
 
 
+
     public static void configurarConexao() {
         if (!conexaoAberta) {
             Scanner scanner = new Scanner(System.in);
@@ -82,7 +83,7 @@ public class Main {
 
 
 
-
+        //Abre conexão com a impressora.
     public static void abrirConexao() {
         if (!conexaoAberta) {
             int retorno = ImpressoraDLL.INSTANCE.AbreConexaoImpressora(tipo, modelo, conexao, parametro);
@@ -98,6 +99,10 @@ public class Main {
     }
 
 
+    /*> Fecha conexão com a impressora.
+    Finaliza a conexão que foi estabelecida em AbreConexaoImpressora.
+    Retorna: O retorno da função é do tipo numérico.
+   A função bem sucedida deve retornar 0. */
 
     public static void fecharConexao() {
         if (conexaoAberta) {
@@ -114,6 +119,11 @@ public class Main {
     }
 
 
+    /*> Envia informações de texto para o buffer da impressora.
+        As informações são impressas quando o buffer atinge o limite, quando é executada a
+        função AvancaPapel ou quando recebe um byte 10 (Line Feed – LF).
+        Caso nenhuma dessas opções seja executada um próximo comando pode apagar os dados do buffer.
+        */
 
     public static void impressaoTexto() {
         if (conexaoAberta) {
@@ -130,6 +140,7 @@ public class Main {
     }
 
 
+    //Imprime o código QRCode com possibilidade de variação de tamanho e nível de correção.
     public static void impressaoQRCode() {
         if (conexaoAberta) {
             int retorno = ImpressoraDLL.INSTANCE.ImpressaoQRCode("Teste de impressao", 6, 4);
@@ -144,7 +155,7 @@ public class Main {
         }
     }
 
-
+    //Realiza a impressão de código de barras.
     public static void impressaoCodigoBarras() {
         if (conexaoAberta) {
             int retorno = ImpressoraDLL.INSTANCE.ImpressaoCodigoBarras(8, "{A012345678912", 100, 2, 3);
@@ -160,7 +171,8 @@ public class Main {
     }
 
 
-
+     /*Imprime Danfe SAT.
+     Essa função recebe o XML de retorno da venda do SAT, valida o conteúdo, constrói o Danfe e realiza a impressão de acordo com a especificação.*/
     public static void ImprimeXMLSAT() {
         if (conexaoAberta) {
 
@@ -175,6 +187,10 @@ public class Main {
         }
     }
 
+    /*Imprime Danfe de cancelamento SAT.
+    > Essa função recebe o XML de retorno da operação de cancelamento
+    e os dados de assinatura do QRCode de venda, valida as informações, constrói
+    o Danfe e realiza impressão de acordo com a especificação.*/
 
     public static void ImprimeXMLCancelamentoSAT() {
         if (conexaoAberta) {
@@ -194,7 +210,9 @@ public class Main {
 
 
 
-
+    /*> Usa parâmetros padrões para abertura de gavetas Elgin.
+        Retorna: O retorno é numérico.
+        A função bem sucedida deve retornar 0.*/
 
     public static void abreGavetaElgin() {
         if (conexaoAberta) {
@@ -211,6 +229,9 @@ public class Main {
 
 
 
+    /*Abre gaveta.
+     Essa função abre gavetas de acordo com os parâmetros fornecidos.
+*/
     public static void abreGaveta() {
         if (conexaoAberta) {
             int retorno = ImpressoraDLL.INSTANCE.AbreGaveta(1, 5, 10);
@@ -227,6 +248,8 @@ public class Main {
 
 
 
+    /* Emite sinal sonoro.
+       Emite sinal sonoro na impressora. Algumas impressoras não estão habilitadas para emitir sinal sonoro.*/
     public static void sinalSonoro() {
         if (conexaoAberta) {
             int retorno = ImpressoraDLL.INSTANCE.SinalSonoro(4, 5, 5);
@@ -245,6 +268,7 @@ public class Main {
     public static void main(String[] args) {
 
         // menu principal //
+        //Grupo: Guilherme Moraes, Nicolas Silva, Lucas Nunes, Beatriz Floel, Luiza Gonçalves//
 
         while (true) {
             System.out.println("\n*************************************************");
